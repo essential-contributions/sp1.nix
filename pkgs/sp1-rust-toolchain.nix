@@ -14,21 +14,25 @@ stdenv.mkDerivation rec {
   version = "1.81.0";
 
   src = fetchurl {
-    url = "https://github.com/succinctlabs/rust/releases/download/v${version}/rust-toolchain-x86_64-unknown-linux-gnu.tar.gz";
-    sha256 = "sha256-+Ll4tE/e39nz3+oSfuEfE+4v2q/96iYZSJ3/e755HM4=";
+    url = "https://github.com/succinctlabs/rust/releases/download/v${version}/rust-toolchain-aarch64-apple-darwin.tar.gz";
+    sha256 = "sha256-tVvf3syK18uRLp3Idam3oqjcZvB13JBoXBkskbkQQZQ=";
   };
 
-  nativeBuildInputs = [
-    autoPatchelfHook
-  ];
+  # nativeBuildInputs = [
+  #   autoPatchelfHook
+  # ];
+  # nativeBuildInputs = lib.optionals stdenv.isLinux [
+  #   autoPatchelfHook
+  # ];
 
-  buildInputs = [
-    xz
-    zlib
-    ncurses
-    gcc-unwrapped
-    stdenv.cc.cc.lib
-  ];
+  # buildInputs = [
+  # ] ++ lib.optionals stdenv.isLinux [
+  #   xz
+  #   zlib
+  #   ncurses
+  #   gcc-unwrapped
+  #   stdenv.cc.cc.lib
+  # ];
 
   sourceRoot = ".";
 
@@ -46,6 +50,6 @@ stdenv.mkDerivation rec {
     description = "Succinct Labs Rust toolchain";
     homepage = "https://github.com/succinctlabs/rust";
     license = licenses.mit;
-    platforms = [ "x86_64-linux" ];
+    platforms = [ "x86_64-linux" "aarch64-darwin" ];
   };
 }

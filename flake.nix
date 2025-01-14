@@ -32,7 +32,10 @@
         sp1-rust-toolchain = pkgs.sp1-rust-toolchain;
       });
 
-      devShells = perSystemPkgs (pkgs: { });
+      devShells = perSystemPkgs (pkgs: { 
+          dev = pkgs.callPackage ./pkgs/shell.nix { };
+          default = inputs.self.devShells.${pkgs.system}.dev;
+      });
 
       formatter = perSystemPkgs (pkgs: pkgs.nixfmt-rfc-style);
     };
